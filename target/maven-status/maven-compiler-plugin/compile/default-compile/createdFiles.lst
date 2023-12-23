@@ -9,6 +9,7 @@ collectors\post\TweetsCollector.class
 viewtest\Home.class
 views\NFTsScene$2.class
 views\Home$2.class
+views\Home$7.class
 viewtest\Home$2.class
 views\Home$4.class
 dataprocessors\GetDataFromJson$1.class

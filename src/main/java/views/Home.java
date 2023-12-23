@@ -41,7 +41,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
-        jftSearch = new javax.swing.JTextField();
+        jtfSearch = new javax.swing.JTextField();
         btn1H = new javax.swing.JButton();
         btn6H = new javax.swing.JButton();
         btn24H = new javax.swing.JButton();
@@ -107,6 +107,11 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
         jScrollPane1.setViewportView(jTable1);
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         btn1H.setText("1H");
         btn1H.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +153,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSearch)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jftSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addComponent(btn1H, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,7 +173,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch)
-                    .addComponent(jftSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn6H)
                     .addComponent(btn24H)
                     .addComponent(btn7D)
@@ -200,11 +205,21 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
         // TODO add your handling code here:
         btnTimeSlotClicked(btn1H.getText());
     }//GEN-LAST:event_btn1HActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+        if(jtfSearch.getText().equals("")) return;
+        defaultTableModel.setRowCount(0);
+        for(NFT x : currentNfts){
+            if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
+                defaultTableModel.addRow(x.getNFT());
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
     
     private void btnTimeSlotClicked(String timeSlot){
-        List<NFT> NFTsByHour = getNFTsByTimeslot(timeSlot);
+        currentNfts = getNFTsByTimeslot(timeSlot);
         defaultTableModel.setRowCount(0);
-        for(NFT x : NFTsByHour){
+        for(NFT x : currentNfts){
             defaultTableModel.addRow(x.getNFT());
         }
     }
@@ -251,6 +266,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
         });
     }
     DefaultTableModel defaultTableModel;
+    private List<NFT> currentNfts;
     private List<NFT> nfts;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn1H;
@@ -261,8 +277,8 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
     private javax.swing.JPanel header;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jftSearch;
     private javax.swing.JLabel jlbHome;
     private javax.swing.JLabel jlbNFT;
+    private javax.swing.JTextField jtfSearch;
     // End of variables declaration//GEN-END:variables
 }
