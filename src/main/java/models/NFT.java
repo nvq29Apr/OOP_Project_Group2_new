@@ -19,8 +19,38 @@ public class NFT {
         this.items = items;
         this.timeSlot = timeSlot;
     }
+
+    public String getVolume() {
+        return volume;
+    }
+
+    public String getChange() {
+        return change;
+    }
+
+    public String getFloorPrice() {
+        return floorPrice;
+    }
+
+    public String getOwners() {
+        return owners;
+    }
+
+    public String getItems() {
+        return items;
+    }
     
     public String getName() {
         return name;
     }
+    
+    public Object[] getNFT(){
+        Object[] s = new Object[]{name, volume, change, floorPrice, owners, items};
+        return s;
+    }
+
+    public String getTimeSlot() {
+        return timeSlot;
+    }
+    
 }
