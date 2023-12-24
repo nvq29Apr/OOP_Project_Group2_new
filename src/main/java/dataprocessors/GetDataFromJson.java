@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 import models.ConstantVar;
 import models.NFT;
+import models.Tweet;
 
 /**
  *
@@ -35,5 +36,16 @@ public interface GetDataFromJson extends ConstantVar {
             uniqueNames.add(name.trim());
         }
         return uniqueNames;
+    }
+    
+    default List<Tweet> getTweetsFromJson(){
+        List<Tweet> tweets = null;
+        try (FileReader reader = new FileReader(TWEET_JSON_PATH)) {
+            Type type = new TypeToken<List<Tweet>>() {}.getType();
+            tweets = gson.fromJson(reader, type);
+        } catch (Exception e) {
+            
+        }
+        return tweets;
     }
 }

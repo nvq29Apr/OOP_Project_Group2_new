@@ -22,4 +22,37 @@ public class Tweet {
         this.hashtags = hashtags;
         this.createdAt = createdAt;
     } 
+
+    public String getName() {
+        return name;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public String getRetweet() {
+        return retweet;
+    }
+
+    public String getLike() {
+        return like;
+    }
+
+    public String getView() {
+        return view;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+    
 }

@@ -4,12 +4,8 @@
  */
 package views;
 
+import views.*;
 import dataprocessors.GetDataFromJson;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-import models.NFT;
 
 /**
  *
@@ -22,9 +18,6 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
      */
     public Home() {
         initComponents();
-        defaultTableModel = (DefaultTableModel)jTable1.getModel();
-        nfts = getNFTsFromJson();
-        btnTimeSlotClicked(btn1H.getText());
 //        jScrollPane1.setVisible(false);
     }
 
@@ -43,15 +36,16 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
         jlbNFT1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
-        filterPanel = new javax.swing.JPanel();
-        btnSearch = new javax.swing.JButton();
-        jtfSearch = new javax.swing.JTextField();
-        btn1H = new javax.swing.JButton();
-        btn6H = new javax.swing.JButton();
-        btn24H = new javax.swing.JButton();
-        btn7D = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField3 = new javax.swing.JTextField();
+        jTextArea1 = new javax.swing.JTextArea();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jTextField6 = new javax.swing.JTextField();
+        jTextField7 = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,14 +55,14 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
 
         jlbHome.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlbHome.setText("Home");
-        jlbHome.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jlbHomeMouseClicked(evt);
-            }
-        });
 
         jlbNFT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT.setText("NFT");
+        jlbNFT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbNFTMouseClicked(evt);
+            }
+        });
 
         jlbNFT1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT1.setText("Tweet");
@@ -91,14 +85,14 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
             .addGroup(headerLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jlbHome, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
                 .addComponent(jlbNFT)
                 .addGap(28, 28, 28)
                 .addComponent(jlbNFT1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGap(54, 54, 54)
-                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         headerLayout.setVerticalGroup(
@@ -114,113 +108,93 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        btnSearch.setBackground(new java.awt.Color(255, 255, 204));
-        btnSearch.setText("Search");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
 
-        jtfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jtfSearchKeyPressed(evt);
-            }
-        });
+        jTextField1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jTextField1.setText("NHÓM 2");
 
-        btn1H.setBackground(new java.awt.Color(204, 255, 255));
-        btn1H.setText("1H");
-        btn1H.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn1HActionPerformed(evt);
-            }
-        });
+        jTextField2.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jTextField2.setText("Học phần: Lập trình hướng đối tượng");
 
-        btn6H.setBackground(new java.awt.Color(204, 255, 255));
-        btn6H.setText("6H");
-        btn6H.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn6HActionPerformed(evt);
-            }
-        });
+        jTextField3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField3.setText("Nhóm sinh viên thực hiện");
 
-        btn24H.setBackground(new java.awt.Color(204, 255, 255));
-        btn24H.setText("24H");
-        btn24H.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn24HActionPerformed(evt);
-            }
-        });
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextArea1.setRows(5);
+        jTextArea1.setText("Nguyễn Văn Quyết - 20215129\nNguyễn Văn Minh - 202215092\nNguyễn Thị Thảo Nguyên - 20215104 \nNguyễn Đức Trung - 20210867\nNguyễn Công Nhuần – 20215108\nĐỗ Minh Đức – 20215036");
 
-        btn7D.setBackground(new java.awt.Color(204, 255, 255));
-        btn7D.setText("7D");
-        btn7D.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn7DActionPerformed(evt);
-            }
-        });
+        jTextField4.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        jTextField4.setText("Đề tài : Thu thập dữ liệu NFTs");
 
-        javax.swing.GroupLayout filterPanelLayout = new javax.swing.GroupLayout(filterPanel);
-        filterPanel.setLayout(filterPanelLayout);
-        filterPanelLayout.setHorizontalGroup(
-            filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterPanelLayout.createSequentialGroup()
-                .addComponent(btnSearch)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 243, Short.MAX_VALUE)
-                .addComponent(btn1H, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn6H, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn24H, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btn7D, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        filterPanelLayout.setVerticalGroup(
-            filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(filterPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(filterPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn7D)
-                    .addComponent(btn24H)
-                    .addComponent(btnSearch)
-                    .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn6H)
-                    .addComponent(btn1H))
+        jTextField5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField5.setText("Mã lớp học:");
+
+        jTextField6.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField6.setText("143578");
+
+        jTextField7.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField7.setText("Giảng viên hướng dẫn");
+
+        jTextField8.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jTextField8.setText("TS. Trịnh Tuấn Đạt");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(289, 289, 289)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(248, 248, 248))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(54, 54, 54))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(171, 171, 171))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(343, 343, 343))))
         );
-
-        jScrollPane1.setEnabled(false);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Volume", "Change", "Floor price", "Owners", "Items"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setGridColor(new java.awt.Color(153, 153, 153));
-        jTable1.setInheritsPopupMenu(true);
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextArea1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,8 +203,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(filterPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -240,84 +213,27 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
                 .addContainerGap()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(filterPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn6HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn6HActionPerformed
-        // TODO add your handling code here:
-        btnTimeSlotClicked(btn6H.getText());
-    }//GEN-LAST:event_btn6HActionPerformed
-
-    private void btn24HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn24HActionPerformed
-        // TODO add your handling code here:
-        btnTimeSlotClicked(btn24H.getText());
-    }//GEN-LAST:event_btn24HActionPerformed
-
-    private void btn7DActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7DActionPerformed
-        // TODO add your handling code here:
-        btnTimeSlotClicked(btn7D.getText());
-    }//GEN-LAST:event_btn7DActionPerformed
-
-    private void btn1HActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1HActionPerformed
-        // TODO add your handling code here:
-        btnTimeSlotClicked(btn1H.getText());
-    }//GEN-LAST:event_btn1HActionPerformed
-
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
-        if(jtfSearch.getText().equals("")) return;
-        defaultTableModel.setRowCount(0);
-        for(NFT x : currentNfts){
-            if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
-                defaultTableModel.addRow(x.getNFT());
-        }
-    }//GEN-LAST:event_btnSearchActionPerformed
-
-    private void jlbHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbHomeMouseClicked
-        // TODO add your handling code here:
-        filterPanel.setVisible(false);
-        jScrollPane1.setVisible(false);
-        
-    }//GEN-LAST:event_jlbHomeMouseClicked
-
-    private void jtfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchKeyPressed
-        // TODO add your handling code here:
-        if(evt.getKeyCode() ==  KeyEvent.VK_ENTER){
-            if(jtfSearch.getText().equals("")) return;
-            defaultTableModel.setRowCount(0);
-            for(NFT x : currentNfts){
-                if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
-                    defaultTableModel.addRow(x.getNFT());
-            }
-        }
-    }//GEN-LAST:event_jtfSearchKeyPressed
-
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void jlbNFTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNFTMouseClicked
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NFTsScene().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jlbNFTMouseClicked
     
-    private void btnTimeSlotClicked(String timeSlot){
-        currentNfts = getNFTsByTimeslot(timeSlot);
-        defaultTableModel.setRowCount(0);
-        for(NFT x : currentNfts){
-            defaultTableModel.addRow(x.getNFT());
-        }
-    }
-    
-    private List<NFT> getNFTsByTimeslot(String timeSlot){
-        List<NFT> result = new ArrayList<>();
-        for(NFT x : nfts){
-            if(x.getTimeSlot().equals(timeSlot)) result.add(x);
-        }
-        return result;
-    }
     /**
      * @param args the command line arguments
      */
@@ -344,6 +260,7 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
             java.util.logging.Logger.getLogger(Home.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -352,24 +269,22 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
             }
         });
     }
-    DefaultTableModel defaultTableModel;
-    private List<NFT> currentNfts;
-    private List<NFT> nfts;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn1H;
-    private javax.swing.JButton btn24H;
-    private javax.swing.JButton btn6H;
-    private javax.swing.JButton btn7D;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JPanel filterPanel;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel jlbHome;
     private javax.swing.JLabel jlbNFT;
     private javax.swing.JLabel jlbNFT1;
-    private javax.swing.JTextField jtfSearch;
     // End of variables declaration//GEN-END:variables
 }
