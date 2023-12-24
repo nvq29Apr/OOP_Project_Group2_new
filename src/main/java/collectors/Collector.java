@@ -56,6 +56,13 @@ public abstract class Collector<T> implements ConstantVar{
         writer.close();
     }
     
+    public <O> void saveToJSON(List<O> objs, String JSONPath) throws IOException {
+        String json = gson.toJson(objs);
+        FileWriter writer = new FileWriter(JSONPath); 
+        writer.write(json);
+        writer.close();
+    }
+    
     public void clickByJS(WebElement we){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", we);

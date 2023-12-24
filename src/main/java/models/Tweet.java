@@ -10,8 +10,9 @@ public class Tweet {
     private String name, user, content, comment, retweet, like, view;
     private List<String> hashtags;
     private String createdAt;
+    private String relatedNFT;
 
-    public Tweet(String name, String user, String content, String comment, String retweet, String like, String view, List<String> hashtags, String createdAt) {
+    public Tweet(String name, String user, String content, String comment, String retweet, String like, String view, List<String> hashtags, String createdAt, String relatedNFT) {
         this.name = name;
         this.user = user;
         this.content = content;
@@ -21,7 +22,8 @@ public class Tweet {
         this.view = view;
         this.hashtags = hashtags;
         this.createdAt = createdAt;
-    } 
+        this.relatedNFT = relatedNFT;
+    }
 
     public String getName() {
         return name;
@@ -54,5 +56,12 @@ public class Tweet {
     public String getCreatedAt() {
         return createdAt;
     }
-    
+
+    public List<String> getHashtags() {
+        return hashtags;
+    }
+
+    public String getRelatedNFT() {
+        return relatedNFT;
+    }
 }

@@ -8,8 +8,6 @@ import dataprocessors.GetDataFromJson;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import models.NFT;
 
@@ -27,11 +25,6 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
         defaultTableModel = (DefaultTableModel)jTable1.getModel();
         nfts = getNFTsFromJson();
         btnTimeSlotClicked(btn1H.getText());
-//        jScrollPane1.setVisible(false);
-
-        JPanel mainPanel = new JPanel();
-        BoxLayout boxLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
-        mainPanel.setLayout(boxLayout);
     }
 
     /**

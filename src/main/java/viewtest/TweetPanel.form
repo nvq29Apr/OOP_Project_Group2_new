@@ -48,7 +48,7 @@
               <Component id="jScrollPane1" min="-2" pref="192" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="82" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -81,7 +81,7 @@
                   <Component id="lbUser" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="lbCreatedAt" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="108" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="108" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -127,7 +127,7 @@
                   <Component id="lbComment" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="lbRetweet" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="58" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="lbLike" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                   <Component id="lbView" min="-2" max="-2" attributes="0"/>

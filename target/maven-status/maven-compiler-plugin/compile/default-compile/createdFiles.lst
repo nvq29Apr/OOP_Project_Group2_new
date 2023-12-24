@@ -1,10 +1,12 @@
 app\App.class
 views\NFTsScene$1.class
 collectors\Collector.class
+app\App$1.class
 viewtest\TweetsScene$3.class
 views\NFTsScene$3.class
 models\ConstantVar.class
 views\NFTsScene$8.class
+dataprocessors\GetDataFromJson$3.class
 viewtest\TweetPanel.class
 viewtest\TweetsScene$1.class
 views\NFTsScene$5.class
@@ -13,11 +15,13 @@ views\NFTsScene$2.class
 views\Home$2.class
 viewtest\NewJFrame.class
 views\Home$4.class
+viewtest\TweetsScene$4.class
 dataprocessors\GetDataFromJson$1.class
 views\NFTsScene$7.class
 views\NFTsScene.class
 viewtest\NewJFrame$1.class
 views\NFTsScene$9.class
+models\Hashtag.class
 dataprocessors\GetDataFromJson.class
 viewtest\TweetsScene$2.class
 views\NFTsScene$4.class

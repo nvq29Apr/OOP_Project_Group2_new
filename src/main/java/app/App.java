@@ -3,6 +3,7 @@ package app;
 import collectors.nft.NFTsCollector;
 import collectors.post.TweetsCollector;
 import java.io.IOException;
+import views.Home;
 
 /**
  *
@@ -15,5 +16,11 @@ public class App {
 
         TweetsCollector tweetCollector = new TweetsCollector();
         tweetCollector.active();
+        
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new Home().setVisible(true);
+            }
+        });
     }
 }

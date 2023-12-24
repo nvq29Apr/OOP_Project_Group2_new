@@ -6,15 +6,22 @@ package collectors.post;
  */
 import collectors.Collector;
 import dataprocessors.GetDataFromJson;
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import models.Hashtag;
 import models.Tweet;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 
 public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson {
+    private HashMap<String, Integer> hashtagsMap;
+    
     public TweetsCollector() {
         super(TWITTER_URL, TWEET_JSON_PATH);
+        hashtagsMap = new HashMap<>();
     }
     
     @Override
@@ -22,6 +29,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
         login();
         
         int totalTweets = 0;
+        
         Set<String> uniqueNames = getUniqueNFTNameToSearch();
         for(String uniqueName : uniqueNames){
             String url = TWITTER_BASE_URL + uniqueName + TWITTER_SEARCH_FILTERS;
@@ -43,7 +51,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
                 // Lấy nội dung tweet
 
                 // Lấy thời gian
-                // Kiểm tra có phải quảng cáo không
+                // Kiểm tra có phải quảng cáo không (quang cao se khong co nhan thoi gian)
                 String createdAt = "";
                 try {
                     WebElement timeElement = tweet.findElement(By.xpath("div/div/div[2]/div[2]/div[1]/div/div[1]/div/div/div[2]/div/div[3]/a/time"));
@@ -80,6 +88,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
                 for(WebElement x : hashtagElement){
                     hashtags.add(x.getText());
                 }
+                putHashtagToMap(hashtags);
 
                 // Lấy số lượt comment, retweet, like, view
                 WebElement interactElement = tweet.findElement(By.cssSelector("div.css-175oi2r.r-1kbdv8c.r-18u37iz.r-1wtj0ep.r-1ye8kvj.r-1s2bzr4"));
@@ -96,6 +105,12 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
             totalTweets += currentTweets.size();
         }
         System.out.println("Collected " + totalTweets + " Tweets!");
+        
+        try {
+            storeHashtag();
+        } catch (IOException ex) {
+            Logger.getLogger(TweetsCollector.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void login(){
@@ -135,6 +150,28 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
             limit = false;
         }
         return limit;
+    }
+    
+    private void putHashtagToMap(List<String> hashtags){
+        for(String hashtag : hashtags){
+            if(hashtagsMap.containsKey(hashtag)){
+                int oldValue = hashtagsMap.get(hashtag);
+                hashtagsMap.replace(hashtag, oldValue + 1);
+            }
+            else{
+                hashtagsMap.put(hashtag, 1);
+            }
+        }
+    }
+    
+    private void storeHashtag() throws IOException{
+        List<Hashtag> hashtags = new ArrayList<>();
+        Set<Map.Entry<String, Integer>> entrySet = hashtagsMap.entrySet();
+        for (Map.Entry<String, Integer> entry : entrySet) {
+            Hashtag hashtag = new Hashtag(entry.getKey(), entry.getValue());
+            hashtags.add(hashtag);
+        }
+        saveToJSON(hashtags, HASHTAG_JSON_PATH);
     }
 }
 

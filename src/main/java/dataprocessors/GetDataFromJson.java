@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import models.ConstantVar;
+import models.Hashtag;
 import models.NFT;
 import models.Tweet;
 
@@ -47,5 +48,16 @@ public interface GetDataFromJson extends ConstantVar {
             
         }
         return tweets;
+    }
+    
+    default List<Hashtag> getHashtagsFromJson(){
+        List<Hashtag> hashtags = null;
+        try (FileReader reader = new FileReader(HASHTAG_JSON_PATH)) {
+            Type type = new TypeToken<List<Hashtag>>() {}.getType();
+            hashtags = gson.fromJson(reader, type);
+        } catch (Exception e) {
+            
+        }
+        return hashtags;
     }
 }

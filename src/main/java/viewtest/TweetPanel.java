@@ -74,7 +74,7 @@ public class TweetPanel extends javax.swing.JPanel {
                 .addComponent(lbUser)
                 .addGap(31, 31, 31)
                 .addComponent(lbCreatedAt)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(108, 108, 108))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,7 +104,7 @@ public class TweetPanel extends javax.swing.JPanel {
                 .addComponent(lbComment)
                 .addGap(54, 54, 54)
                 .addComponent(lbRetweet)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbLike)
                 .addGap(56, 56, 56)
                 .addComponent(lbView)
@@ -144,7 +144,7 @@ public class TweetPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

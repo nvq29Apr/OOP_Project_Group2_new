@@ -4,17 +4,14 @@
  */
 package viewtest;
 
-import views.*;
 import dataprocessors.GetDataFromJson;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
-import models.NFT;
+import models.Hashtag;
 import models.Tweet;
 
 /**
@@ -30,20 +27,13 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         initComponents();
         
         listTweetPanels = new ArrayList<>();
-        List<Tweet> listTweets = getTweetsFromJson();
-        System.out.println("size: " + listTweets);
-        for(Tweet tweet : listTweets) {
-            TweetPanel panel = new TweetPanel(tweet); 
-            listTweetPanels.add(panel); 
-        }
+        listTweets = getTweetsFromJson();
+        addTweetPanel();
         
-        BoxLayout boxLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
-        mainPanel.setLayout(boxLayout);
-        
-        for (TweetPanel tweetPanel : listTweetPanels) {
-            mainPanel.add(tweetPanel);
-        }
-        mainPanel.add(Box.createVerticalStrut(10)); // 10 pixels
+        hashtags = getHashtagsFromJson();
+
+        defaultTableModel = (DefaultTableModel)tHashtagTrends.getModel();
+        addHashtagTrend(); 
     }
 
     /**
@@ -61,11 +51,12 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         jlbNFT1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jspTweets = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        jspHashtagTrends = new javax.swing.JScrollPane();
+        tHashtagTrends = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,7 +119,7 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setEnabled(false);
+        jspTweets.setEnabled(false);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,7 +134,7 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
             .addGap(0, 349, Short.MAX_VALUE)
         );
 
-        jScrollPane1.setViewportView(mainPanel);
+        jspTweets.setViewportView(mainPanel);
 
         jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel2.setText("Tweet Posts");
@@ -151,26 +142,41 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         jLabel3.setText("Hashtag Trends");
 
+        tHashtagTrends.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Hashtag", "Times"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jspHashtagTrends.setViewportView(tHashtagTrends);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jScrollPane2)))
-                        .addContainerGap(25, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(88, 88, 88))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jspTweets, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,8 +189,8 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspTweets, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
 
@@ -202,6 +208,32 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void addTweetPanel(){
+        for(Tweet tweet : listTweets) {
+            TweetPanel panel = new TweetPanel(tweet); 
+            listTweetPanels.add(panel); 
+        }
+        
+        BoxLayout boxLayout = new BoxLayout(mainPanel, BoxLayout.Y_AXIS);
+        mainPanel.setLayout(boxLayout);
+        
+        for (TweetPanel tweetPanel : listTweetPanels) {
+            mainPanel.add(tweetPanel);
+        }
+        mainPanel.add(Box.createVerticalStrut(10)); // 10 pixels
+    }
+    
+    private void addHashtagTrend(){
+        hashtags.sort((Hashtag o1, Hashtag o2) -> {
+            if(o2.getQty() != o1.getQty()) return o2.getQty() - o1.getQty();
+            else return o1.getName().compareTo(o2.getName());
+        });
+        
+        for(Hashtag x : hashtags){
+            defaultTableModel.addRow(x.getHashtag());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -243,7 +275,11 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
             }
         });
     }
+    
+    private List<Hashtag> hashtags;
     private List<TweetPanel> listTweetPanels;
+    private List<Tweet> listTweets;
+    DefaultTableModel defaultTableModel;
 //    private javax.swing.JPanel mainPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
@@ -251,11 +287,12 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlbHome;
     private javax.swing.JLabel jlbNFT;
     private javax.swing.JLabel jlbNFT1;
+    private javax.swing.JScrollPane jspHashtagTrends;
+    private javax.swing.JScrollPane jspTweets;
     private javax.swing.JPanel mainPanel;
+    private javax.swing.JTable tHashtagTrends;
     // End of variables declaration//GEN-END:variables
 }
