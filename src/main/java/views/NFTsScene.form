@@ -69,7 +69,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="jlbNFT" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                  <Component id="jlbNFT1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlbTweet" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
@@ -85,7 +85,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jlbHome" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jlbNFT" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jlbNFT1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbTweet" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnExit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -114,13 +114,16 @@
             <Property name="text" type="java.lang.String" value="NFT"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jlbNFT1">
+        <Component class="javax.swing.JLabel" name="jlbTweet">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Tweet"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jlbTweetMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>

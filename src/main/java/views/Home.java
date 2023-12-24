@@ -66,6 +66,11 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
 
         jlbNFT1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT1.setText("Tweet");
+        jlbNFT1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbNFT1MouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Blog");
@@ -233,6 +238,15 @@ public class Home extends javax.swing.JFrame implements GetDataFromJson {
             }
         });
     }//GEN-LAST:event_jlbNFTMouseClicked
+
+    private void jlbNFT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNFT1MouseClicked
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TweetsScene().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jlbNFT1MouseClicked
     
     /**
      * @param args the command line arguments

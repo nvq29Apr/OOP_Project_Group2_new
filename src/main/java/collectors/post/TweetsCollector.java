@@ -154,6 +154,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
     
     private void putHashtagToMap(List<String> hashtags){
         for(String hashtag : hashtags){
+            if(hashtag.equals("")) continue;
             if(hashtagsMap.containsKey(hashtag)){
                 int oldValue = hashtagsMap.get(hashtag);
                 hashtagsMap.replace(hashtag, oldValue + 1);

@@ -39,7 +39,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
         header = new javax.swing.JPanel();
         jlbHome = new javax.swing.JLabel();
         jlbNFT = new javax.swing.JLabel();
-        jlbNFT1 = new javax.swing.JLabel();
+        jlbTweet = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
         filterPanel = new javax.swing.JPanel();
@@ -69,8 +69,13 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
         jlbNFT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT.setText("NFT");
 
-        jlbNFT1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jlbNFT1.setText("Tweet");
+        jlbTweet.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlbTweet.setText("Tweet");
+        jlbTweet.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbTweetMouseClicked(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Blog");
@@ -93,7 +98,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlbNFT)
                 .addGap(28, 28, 28)
-                .addComponent(jlbNFT1)
+                .addComponent(jlbTweet)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(54, 54, 54)
@@ -107,7 +112,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
                 .addGroup(headerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbHome)
                     .addComponent(jlbNFT)
-                    .addComponent(jlbNFT1)
+                    .addComponent(jlbTweet)
                     .addComponent(jLabel1)
                     .addComponent(btnExit))
                 .addContainerGap(22, Short.MAX_VALUE))
@@ -270,12 +275,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-        if(jtfSearch.getText().equals("")) return;
-        defaultTableModel.setRowCount(0);
-        for(NFT x : currentNfts){
-            if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
-                defaultTableModel.addRow(x.getNFT());
-        }
+        search();
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void jlbHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbHomeMouseClicked
@@ -287,12 +287,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
     private void jtfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchKeyPressed
         // TODO add your handling code here:
         if(evt.getKeyCode() ==  KeyEvent.VK_ENTER){
-            if(jtfSearch.getText().equals("")) return;
-            defaultTableModel.setRowCount(0);
-            for(NFT x : currentNfts){
-                if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
-                    defaultTableModel.addRow(x.getNFT());
-            }
+            search();
         }
     }//GEN-LAST:event_jtfSearchKeyPressed
 
@@ -300,6 +295,16 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void jlbTweetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbTweetMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new TweetsScene().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jlbTweetMouseClicked
     
     private void btnTimeSlotClicked(String timeSlot){
         currentNfts = getNFTsByTimeslot(timeSlot);
@@ -315,6 +320,15 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
             if(x.getTimeSlot().equals(timeSlot)) result.add(x);
         }
         return result;
+    }
+    
+    private void search(){
+        if(jtfSearch.getText().equals("")) return;
+        defaultTableModel.setRowCount(0);
+        for(NFT x : currentNfts){
+            if(x.getName().toLowerCase().contains(jtfSearch.getText().toLowerCase())) 
+                defaultTableModel.addRow(x.getNFT());
+        }
     }
     /**
      * @param args the command line arguments
@@ -370,7 +384,7 @@ public class NFTsScene extends javax.swing.JFrame implements GetDataFromJson {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlbHome;
     private javax.swing.JLabel jlbNFT;
-    private javax.swing.JLabel jlbNFT1;
+    private javax.swing.JLabel jlbTweet;
     private javax.swing.JTextField jtfSearch;
     // End of variables declaration//GEN-END:variables
 }

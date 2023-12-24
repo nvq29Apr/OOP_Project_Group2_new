@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package viewtest;
+package views;
 
 import dataprocessors.GetDataFromJson;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -13,6 +14,7 @@ import javax.swing.BoxLayout;
 import javax.swing.table.DefaultTableModel;
 import models.Hashtag;
 import models.Tweet;
+import views.NFTsScene;
 
 /**
  *
@@ -51,12 +53,16 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         jlbNFT1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnExit = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnSearch = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jspTweets = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jspHashtagTrends = new javax.swing.JScrollPane();
         tHashtagTrends = new javax.swing.JTable();
+        jtfSearch = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jlbResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,6 +80,11 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
 
         jlbNFT.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT.setText("NFT");
+        jlbNFT.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlbNFTMouseClicked(evt);
+            }
+        });
 
         jlbNFT1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jlbNFT1.setText("Tweet");
@@ -119,6 +130,19 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel2.setText("Tweet Posts");
+
+        btnSearch.setText("Search");
+        btnSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSearchMouseClicked(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        jLabel3.setText("Hashtag Trends");
+
         jspTweets.setEnabled(false);
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
@@ -135,12 +159,6 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         );
 
         jspTweets.setViewportView(mainPanel);
-
-        jLabel2.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel2.setText("Tweet Posts");
-
-        jLabel3.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel3.setText("Hashtag Trends");
 
         tHashtagTrends.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,6 +178,14 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         });
         jspHashtagTrends.setViewportView(tHashtagTrends);
 
+        jtfSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfSearchKeyPressed(evt);
+            }
+        });
+
+        jLabel4.setText("Kết quả:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,12 +196,24 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
                     .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jspTweets, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jspTweets, javax.swing.GroupLayout.PREFERRED_SIZE, 403, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlbResult, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                            .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -183,14 +221,22 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jspTweets, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jspHashtagTrends, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addComponent(btnSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jlbResult))))
                 .addGap(24, 24, 24))
         );
 
@@ -208,6 +254,45 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
         this.dispose();
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void btnSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSearchMouseClicked
+        // TODO add your handling code here:
+        search();
+    }//GEN-LAST:event_btnSearchMouseClicked
+
+    private void jtfSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfSearchKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() ==  KeyEvent.VK_ENTER){
+            search();
+        }
+    }//GEN-LAST:event_jtfSearchKeyPressed
+
+    private void jlbNFTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlbNFTMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new NFTsScene().setVisible(true);
+            }
+        });
+    }//GEN-LAST:event_jlbNFTMouseClicked
+
+    private void search(){
+        int cnt = 0;
+        if(jtfSearch.getText().equals("")) return;
+        mainPanel.removeAll();
+        List<Tweet> currentTweets = new ArrayList<>();
+        for(Tweet x : listTweets){
+            if(x.getContent().toLowerCase().contains(jtfSearch.getText().toLowerCase())){
+                currentTweets.add(x);
+                cnt++;
+            }
+                
+        }
+        for(Tweet x : currentTweets){
+            mainPanel.add(new TweetPanel(x));
+        }
+        jlbResult.setText(String.valueOf(cnt));
+    }
     private void addTweetPanel(){
         for(Tweet tweet : listTweets) {
             TweetPanel panel = new TweetPanel(tweet); 
@@ -283,15 +368,19 @@ public class TweetsScene extends javax.swing.JFrame implements GetDataFromJson {
 //    private javax.swing.JPanel mainPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnSearch;
     private javax.swing.JPanel header;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jlbHome;
     private javax.swing.JLabel jlbNFT;
     private javax.swing.JLabel jlbNFT1;
+    private javax.swing.JLabel jlbResult;
     private javax.swing.JScrollPane jspHashtagTrends;
     private javax.swing.JScrollPane jspTweets;
+    private javax.swing.JTextField jtfSearch;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tHashtagTrends;
     // End of variables declaration//GEN-END:variables
