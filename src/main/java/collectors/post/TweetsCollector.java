@@ -19,30 +19,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
     
     @Override
     public void collect() {
-        // Vào trình duyệt ẩn danh
-        options.addArguments("-private");
-            
-        // Tìm element input login
-        WebElement usernameInput = driver.findElement(By.cssSelector("input[autocomplete='username'][name='text']"));
-        usernameInput.sendKeys("nvquyet2904@gmail.com");
-        usernameInput.sendKeys(Keys.ENTER);
-        sleep(5);
-
-        // Nếu báo đăng nhập bất thường
-        try {
-            WebElement authen = driver.findElement(By.cssSelector("input[data-testid='ocfEnterTextTextInput'][value='']"));
-            authen.sendKeys("daika_quyet");
-            authen.sendKeys(Keys.ENTER);
-        }
-        catch(org.openqa.selenium.NoSuchElementException e) {
-            
-        }
-
-        sleep(5);
-        WebElement password = driver.findElement(By.cssSelector("input[autocomplete='current-password'][name='password']"));
-        password.sendKeys("quyetdaika2803");
-        password.sendKeys(Keys.ENTER);
-        sleep(5);
+        login();
         
         int totalTweets = 0;
         Set<String> uniqueNames = getUniqueNFTNameToSearch();
@@ -51,13 +28,7 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
             driver.navigate().to(url);
             sleep(5);
             
-            try {
-                WebElement retryButton = driver.findElement(By.cssSelector(".css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-2yi16.r-1qi8awa.r-ymttw5.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l"));
-                // Limited
-                break;
-            } catch(org.openqa.selenium.NoSuchElementException e) {
-                //
-            }
+            if(checkLimited()) break;
             
             List<WebElement> currentTweets = null;
             try {
@@ -119,12 +90,51 @@ public class TweetsCollector extends Collector<Tweet> implements GetDataFromJson
 
                 // Thêm vào danh sách để xử lý, lưu trữ
                 // Tweet(String name, String user, String content, String comment, String retweet, String like, String view, List<String> hashtags, String createdAt)
-                objects.add(new Tweet(name, user, content, interacts[0], interacts[1], interacts[2], interacts[3], hashtags, createdAt));
+                objects.add(new Tweet(name, user, content, interacts[0], interacts[1], interacts[2], interacts[3], hashtags, createdAt, uniqueName));
             }
 //            System.out.println("Số tweet đã lấy hiện tại: " + currentTweets.size()); 
             totalTweets += currentTweets.size();
         }
         System.out.println("Collected " + totalTweets + " Tweets!");
-    }  
+    }
+    
+    private void login(){
+        // Vào trình duyệt ẩn danh
+        options.addArguments("-private");
+            
+        // Tìm element input login
+        WebElement usernameInput = driver.findElement(By.cssSelector("input[autocomplete='username'][name='text']"));
+        usernameInput.sendKeys(TWITTER_USERNAME);
+        usernameInput.sendKeys(Keys.ENTER);
+        sleep(5);
+
+        // Nếu báo đăng nhập bất thường
+        try {
+            WebElement authen = driver.findElement(By.cssSelector("input[data-testid='ocfEnterTextTextInput'][value='']"));
+            authen.sendKeys("daika_quyet");
+            authen.sendKeys(Keys.ENTER);
+        }
+        catch(org.openqa.selenium.NoSuchElementException e) {
+            
+        }
+
+        sleep(5);
+        WebElement password = driver.findElement(By.cssSelector("input[autocomplete='current-password'][name='password']"));
+        password.sendKeys(TWITTER_PASSWORD);
+        password.sendKeys(Keys.ENTER);
+        sleep(5);
+    }
+    
+    private boolean checkLimited(){
+        boolean limit = false;
+        try {
+            WebElement retryButton = driver.findElement(By.cssSelector(".css-175oi2r.r-sdzlij.r-1phboty.r-rs99b7.r-lrvibr.r-2yi16.r-1qi8awa.r-ymttw5.r-1loqt21.r-o7ynqc.r-6416eg.r-1ny4l3l"));
+            // Limited
+            limit = true;
+        } catch(org.openqa.selenium.NoSuchElementException e) {
+            limit = false;
+        }
+        return limit;
+    }
 }
 

@@ -24,7 +24,7 @@ public class NewJFrame extends javax.swing.JFrame implements GetDataFromJson{
         initComponents();
 //        listTweets = getTweetsFromJson();
 //        mainPanel = new TweetPanel();
-        lbName.setText("hello");
+        lbName.setText("hello");        
     }
 
     /**
@@ -36,6 +36,7 @@ public class NewJFrame extends javax.swing.JFrame implements GetDataFromJson{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
         lbName = new javax.swing.JLabel();
 
@@ -59,24 +60,26 @@ public class NewJFrame extends javax.swing.JFrame implements GetDataFromJson{
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(lbName)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(237, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setViewportView(mainPanel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(64, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -118,6 +121,7 @@ public class NewJFrame extends javax.swing.JFrame implements GetDataFromJson{
     }
 //    private List<Tweet> listTweets;
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbName;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
