@@ -5,6 +5,7 @@ collectors\Collector.class
 views\Home$5.class
 views\NFTsScene$12.class
 app\App$1.class
+collectors\post\BlogsCollector.class
 views\NFTsScene$3.class
 models\ConstantVar.class
 views\TweetsScene$7.class

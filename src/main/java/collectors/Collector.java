@@ -3,22 +3,19 @@ package collectors;
 import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import models.ConstantVar;
-//import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-//import org.openqa.selenium.NoSuchElementException;
-//import org.openqa.selenium.support.ui.ExpectedConditions;
+
 /**
  *
  * @author quyetdaika
+ * @param <T>
  */
 public abstract class Collector<T> implements ConstantVar{
     protected String url, JSONPath;
@@ -33,14 +30,13 @@ public abstract class Collector<T> implements ConstantVar{
         gson = new Gson();
         objects = new ArrayList<>();
         options = new FirefoxOptions();
-//        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
     
     public void active() throws InterruptedException, IOException {
-        System.setProperty("webdriver.gecko.driver", "geckodriver.exe"); //Config môi trường để web chạy
+        System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
         driver = new FirefoxDriver(options);        
-        driver.get(url);  //Đưa url vào web để dẫn đến trang ở đây truyền trực tiếp nhưng thường hãy tách biến ra và config cứng lại       
-        Thread.sleep(5000); // Đợi 5s để web ổn định có thể lấy dễ hơn
+        driver.get(url);    
+        Thread.sleep(5000);
         
         collect();
         saveToJSON();
@@ -75,12 +71,4 @@ public abstract class Collector<T> implements ConstantVar{
             
         }
     }
-    
-//    public void waitElement(String cssSelector){
-//        try{
-//            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(cssSelector)));
-//        } catch(NoSuchElementException e){
-//            
-//        }
-//    }
 }

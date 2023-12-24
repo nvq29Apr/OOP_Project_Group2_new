@@ -37,7 +37,7 @@ public class NFTsCollector extends Collector<NFT> implements GetDataFromJson{
         }
         
         Set<String> nameUniques = new HashSet<>();
-        // List of timing 1H 6H 24H 7D
+        // Lọc theo giờ 1H 6H 24H 7D
         List<WebElement> timeSlots = driver.findElements(By.xpath(BINANCE_TIMING_XPATH));
         for(WebElement h : timeSlots){
             clickByJS(h);

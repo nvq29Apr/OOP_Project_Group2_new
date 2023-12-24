@@ -21,4 +21,8 @@ public interface ConstantVar {
     String NFT_JSON_PATH = "./json/NFTsFromBinance.json";
     String TWEET_JSON_PATH = "./json/Tweets.json";
     String HASHTAG_JSON_PATH = "./json/Hashtags.json";
+    
+    String BLOG_URL = "https://nftcalendar.io/";
+    String BLOG_BASE_URL = "https://nftcalendar.io/search/";
+    String BLOG_JSON_PATH = "./json/Blogs.json";
 }
