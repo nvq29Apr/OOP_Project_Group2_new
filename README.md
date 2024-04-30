@@ -10,7 +10,7 @@ A non-fungible token (NFT) is a unique digital identifier that is recorded on a 
 * Assignment : Collect data on NFTs and articles related to them, from which statistics and analysis are derived
 * Contributors: 2
 * Time complete : 3 weeks
-* My task: disign packages, crawl data, handle data
+* My task: design packages, crawl data, handle data
 * Languages and Tools : Java, Selenium, Gson, IntelliJ IDEA
 
 #### Design
